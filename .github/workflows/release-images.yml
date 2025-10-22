@@ -15,7 +15,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      - name: Enable QEMU for cross-compilation (optional)
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
       - name: Install Nix
         uses: cachix/install-nix-action@v31
         with:
@@ -24,11 +27,8 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             system-features = nixos-test benchmark big-parallel kvm
+            extra-platform = aarch64-linux
 
-      - name: Enable QEMU for cross-compilation (optional)
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
 
       - name: Build Dogebox OS
         run: |
