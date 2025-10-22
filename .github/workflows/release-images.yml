@@ -32,9 +32,9 @@ jobs:
 
       - name: Build Dogebox OS
         run: |
-          nix build .#packages.x86_64-linux.iso -o result-x86_64-linux-iso
           nix build .#packages.aarch64-linux.iso -o result-aarch64-linux-iso
-          nix build .#packages.aarch64-linux.t6 -o result-tc
+          nix build .#packages.aarch64-linux.t6 -o result-t6
+          nix build .#packages.x86_64-linux.iso -o result-x86_64-linux-iso
           echo "Copying artefacts"
           mkdir -p artifacts
           cp ./result-x86_64-linux-iso/iso/*.iso artifacts/
